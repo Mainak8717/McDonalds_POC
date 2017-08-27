@@ -16,7 +16,6 @@ namespace McDonalds_POC
 			base.ViewDidLoad();
             this.NavigationController.NavigationBar.BarTintColor = UIColor.Red;
 			this.Title = "Local Files";
-			string[] tableItems = new string[] { "Vegetables", "Fruits", "Flower Buds", "Legumes", "Bulbs", "Tubers"};
 
 			var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 			NSFileManager fileManager = NSFileManager.DefaultManager;

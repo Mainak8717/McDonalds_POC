@@ -1,21 +1,14 @@
 ﻿<Properties StartupConfiguration="{9F9816BD-37F2-43B9-82E4-C0A3AAE230D8}|Default">
   <MonoDevelop.Ide.ItemProperties.McDonalds__POC PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.E48B4C87-6E51-449A-974B-D2D685100032" HideGettingStarted="True" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="McDonalds_POC/DownloadFilesSessionDelegate.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="McDonalds_POC Status">
     <Files>
-      <File FileName="McDonalds_POC/AppDelegate.cs" Line="29" Column="1" />
-      <File FileName="McDonalds_POC/localFilesTableSource.cs" Line="159" Column="2" />
-      <File FileName="McDonalds_POC/ViewControllers/LocalFilesVC.cs" Line="22" Column="1" />
-      <File FileName="McDonalds_POC/ViewControllers/WebViewModalVC.cs" Line="116" Column="1" />
-      <File FileName="McDonalds_POC/DownloadFilesSessionDelegate.cs" Line="8" Column="67" />
+      <File FileName="McDonalds_POC/ViewControllers/WebViewModalVC.cs" Line="84" Column="9" />
+      <File FileName="McDonalds_POC Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore>
-      <Breakpoint file="/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/localFilesTableSource.cs" relfile="McDonalds_POC/localFilesTableSource.cs" line="146" column="1" />
-      <Breakpoint file="/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/ViewControllers/LocalFilesVC.cs" relfile="McDonalds_POC/ViewControllers/LocalFilesVC.cs" line="21" column="17" />
-      <Breakpoint file="/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/DownloadFilesSessionDelegate.cs" relfile="McDonalds_POC/DownloadFilesSessionDelegate.cs" line="41" column="1" />
-    </BreakpointStore>
+    <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />

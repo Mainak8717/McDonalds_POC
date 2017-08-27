@@ -13,7 +13,6 @@ namespace McDonalds_POC
 		private NSUrl url;
 		private LoadingOverlay loadPop;
 
-
 		public WebViewModalVC(NSUrl url) : base("WebViewModalVC", null)
 		{
 			this.url = url;
@@ -22,11 +21,9 @@ namespace McDonalds_POC
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-
 			webView = new WKWebView(View.Frame, new WKWebViewConfiguration());
 			webView.UIDelegate = this;
 			webView.NavigationDelegate = this;
-
 			View.AddSubview(webView);
 			webView.LoadRequest(new NSUrlRequest(url));
 		}
@@ -82,9 +79,14 @@ namespace McDonalds_POC
 
 		public void DownloadFiles()
 		{
+			//   https://spo.mcd.com/sites/seeit_development3/brand/Shared%20Documents/17155MCD-Wireframe-TemplateGrid_10.pdf,
+			//   https://spo.mcd.com/sites/seeit_development3/brand/PublishingImages/burgers%20test.jpg,
+			//   https://spo.mcd.com/sites/seeit_development3/brand/PublishingImages/test1.mp4
+
 			NSUrl urls = NSUrl.FromString("https://spo.mcd.com/sites/seeit_development3/brand/PublishingImages/burgers%20test.jpg");
 			//NSUrl urls = NSUrl.FromString("https://spo.mcd.com/sites/seeit_development3/brand/PublishingImages/test1.mp4");
-			// Configure your download session.
+			//NSUrl urls = NSUrl.FromString("https://spo.mcd.com/sites/seeit_development3/brand/Shared%20Documents/17155MCD-Wireframe-TemplateGrid_10.pdf");
+
 			var config = NSUrlSessionConfiguration.DefaultSessionConfiguration;
 			NSUrlSession session = NSUrlSession.FromConfiguration(config, new DownloadFilesSessionDelegate(), new NSOperationQueue());
 			var downloadTask = session.CreateDownloadTask(NSUrlRequest.FromUrl(urls));

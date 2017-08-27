@@ -10,7 +10,7 @@ namespace McDonalds_POC
 	{
 		public override void DidFinishDownloading(NSUrlSession session, NSUrlSessionDownloadTask downloadTask, NSUrl location)
 		{
-			string urlString = System.Web.HttpUtility.UrlDecode(downloadTask.CurrentRequest.Url.ToString())  ;
+			string urlString = System.Web.HttpUtility.UrlDecode(downloadTask.CurrentRequest.Url.ToString());
 			string fileType = urlString.Substring(urlString.Length - 3);
 			int idx = urlString.LastIndexOf('/');
 			string fileName = urlString.Substring(idx + 1);
@@ -43,21 +43,28 @@ namespace McDonalds_POC
 			//challenge.Sender.UseCredential(userCredential, challenge);
 			completionHandler(NSUrlSessionAuthChallengeDisposition.UseCredential, userCredential);
 		}
-public string UserName
-{
-get
-{
-var account = AccountStore.Create().FindAccountsForService(AppDelegate.AppName).FirstOrDefault();
-return (account != null) ? account.Properties["Username"] : null;
-}
-}
-public string Password
-{
-	get
-	{
-		var account = AccountStore.Create().FindAccountsForService(AppDelegate.AppName).FirstOrDefault();
-		return (account != null) ? account.Properties["Password"] : null;
-	}
+		[Export("URLSession:downloadTask:didWriteData:totalBytesWritten:totalBytesExpectedToWrite:")]
+		public override void DidWriteData(NSUrlSession session, NSUrlSessionDownloadTask downloadTask, long bytesWritten, long totalBytesWritten, long totalBytesExpectedToWrite)
+		{
+			float progress = (totalBytesWritten / (float)totalBytesExpectedToWrite) * 100;
+			Console.WriteLine(string.Format("progress: {0}%", progress));
+		}
+
+		public string UserName
+		{
+			get
+			{
+				var account = AccountStore.Create().FindAccountsForService(AppDelegate.AppName).FirstOrDefault();
+				return (account != null) ? account.Properties["Username"] : null;
+			}
+		}
+		public string Password
+		{
+			get
+			{
+				var account = AccountStore.Create().FindAccountsForService(AppDelegate.AppName).FirstOrDefault();
+				return (account != null) ? account.Properties["Password"] : null;
+			}
 		}
 	}
 }

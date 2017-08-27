@@ -1,8 +1,9 @@
 ﻿using System;
 using UIKit;
 using Foundation;
-using UIKit;
 using CoreGraphics;
+using System.Linq;
+using MediaPlayer;
 
 namespace McDonalds_POC
 {
@@ -39,11 +40,59 @@ namespace McDonalds_POC
 			NSFileManager fileManager = NSFileManager.DefaultManager;
 			NSError error;
 			string[] listOfFiles = fileManager.GetDirectoryContent(documents, out error);
-			string jpgFilename = System.IO.Path.Combine(documents, listOfFiles[0]);
-					
+			string fileSelected = "";
+			foreach (string fileName in listOfFiles)
+			{
+				if (fileName.Equals(tableItems[indexPath.Row]))
+					fileSelected = System.IO.Path.Combine(documents, listOfFiles[indexPath.Row]);
+			}
+			switch (fileSelected.Substring(fileSelected.Length - 3))
+			{
+				case "jpg":
+					loadImage(fileSelected);
+					break;
+				case "pdf":
+					loadPDF(fileSelected);
+					break;
+				case "mp4":
+					playVideo(fileSelected);
+					break;
 
+			}
+			tableView.DeselectRow(indexPath, true);
+		}
+		private void loadPDF(string pdfFileName)
+		{
+			UIWebView pdfView = new UIWebView(UIScreen.MainScreen.Bounds);
+			pdfView.LoadRequest(new NSUrlRequest(NSUrl.FromFilename(pdfFileName)));
+			pdfView.ScalesPageToFit = true;
+
+			UIViewController popover = new UIViewController();
+			popover.View = pdfView;
+			popover.ModalPresentationStyle = UIModalPresentationStyle.Popover;
+
+			// Grab Image
+			var image = UIImage.FromFile("closeImg.png");
+
+			// Add a close button
+			var closeButton = new ImageButton(new CGRect(UIScreen.MainScreen.Bounds.Size.Width - 80, 20, image.Size.Width, image.Size.Height));
+			closeButton.UserInteractionEnabled = true;
+			closeButton.Image = image;
+			pdfView.AddSubview(closeButton);
+
+			// Wireup the close button
+			closeButton.Touched += (button) =>
+			{
+				popover.DismissViewController(true, null);
+			};
+
+			// Present the popover
+			owner.PresentViewController(popover, true, null);
+		}
+		private void loadImage(string jpgFileName)
+		{
 			UIImageView imageView = new UIImageView(new CGRect(0, 0, 150, 150));
-			imageView.Image = UIImage.FromFile(jpgFilename);
+			imageView.Image = UIImage.FromFile(jpgFileName);
 			imageView.UserInteractionEnabled = true;
 			imageView.ContentMode = UIViewContentMode.ScaleAspectFit;
 			// Create a view controller to act as the popover
@@ -68,9 +117,24 @@ namespace McDonalds_POC
 
 			// Present the popover
 			owner.PresentViewController(popover, true, null);
-			tableView.DeselectRow(indexPath, true);
+		}
+		private void playVideo(string videoFile)
+		{
+
+			MPMoviePlayerController moviePlayer = new MPMoviePlayerController(NSUrl.FromFilename(videoFile));
+			owner.View.AddSubview(moviePlayer.View);
+			moviePlayer.SetFullscreen(true, true);
+			moviePlayer.Play();
+			NSNotificationCenter.DefaultCenter.AddObserver(
+					MPMoviePlayerController.PlaybackDidFinishNotification,
+					(notification) =>
+					{
+						moviePlayer.View.RemoveFromSuperview();
+						moviePlayer.Dispose();
+					});
 		}
 	}
+
 
 	public class ImageButton : UIImageView
 	{
