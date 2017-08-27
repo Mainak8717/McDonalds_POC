@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Foundation;
+using Xamarin.Auth;
 
 namespace McDonalds_POC
 {
@@ -33,9 +35,29 @@ namespace McDonalds_POC
 				}
 			}
 		}
-		public override void DidWriteData(NSUrlSession session, NSUrlSessionDownloadTask downloadTask, long bytesWritten, long totalBytesWritten, long totalBytesExpectedToWrite)
+
+		public override void DidReceiveChallenge(NSUrlSession session, NSUrlSessionTask task, NSUrlAuthenticationChallenge challenge, Action<NSUrlSessionAuthChallengeDisposition, NSUrlCredential> completionHandler)
 		{
-			//base.DidWriteData(session, downloadTask, bytesWritten, totalBytesWritten, totalBytesExpectedToWrite);
+			//base.DidReceiveChallenge(session, task, challenge, completionHandler);
+			NSUrlCredential userCredential = NSUrlCredential.FromUserPasswordPersistance(UserName, Password, NSUrlCredentialPersistence.None);
+			//challenge.Sender.UseCredential(userCredential, challenge);
+			completionHandler(NSUrlSessionAuthChallengeDisposition.UseCredential, userCredential);
+		}
+public string UserName
+{
+get
+{
+var account = AccountStore.Create().FindAccountsForService(AppDelegate.AppName).FirstOrDefault();
+return (account != null) ? account.Properties["Username"] : null;
+}
+}
+public string Password
+{
+	get
+	{
+		var account = AccountStore.Create().FindAccountsForService(AppDelegate.AppName).FirstOrDefault();
+		return (account != null) ? account.Properties["Password"] : null;
+	}
 		}
 	}
 }

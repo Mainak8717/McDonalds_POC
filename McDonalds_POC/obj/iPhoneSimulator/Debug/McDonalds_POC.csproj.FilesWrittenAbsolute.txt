@@ -1,0 +1,17 @@
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/obj/iPhoneSimulator/Debug/Xamarin.iOS,Version=v1.0.AssemblyAttribute.cs
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/obj/iPhoneSimulator/Debug/device-builds/iphone9.1-10.3/ibtool/_BundleResourceWithLogicalName.items
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/obj/iPhoneSimulator/Debug/device-builds/iphone9.1-10.3/actool/_PartialAppManifest.items
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/obj/iPhoneSimulator/Debug/device-builds/iphone9.1-10.3/actool/_BundleResourceWithLogicalName.items
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/obj/iPhoneSimulator/Debug/device-builds/iphone9.1-10.3/optimized/closeImg.png
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/obj/iPhoneSimulator/Debug/device-builds/iphone9.1-10.3/optimized/
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/bin/iPhoneSimulator/Debug/McDonalds_POC.pdb
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/bin/iPhoneSimulator/Debug/McDonalds_POC.exe
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/obj/iPhoneSimulator/Debug/McDonalds_POC.exe
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/obj/iPhoneSimulator/Debug/McDonalds_POC.pdb
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/bin/iPhoneSimulator/Debug/PInvoke.Windows.Core.dll
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/bin/iPhoneSimulator/Debug/PInvoke.Kernel32.dll
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/bin/iPhoneSimulator/Debug/PInvoke.BCrypt.dll
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/bin/iPhoneSimulator/Debug/PInvoke.NCrypt.dll
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/bin/iPhoneSimulator/Debug/Validation.dll
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/bin/iPhoneSimulator/Debug/PCLCrypto.dll
+/Users/Mainak/Projects/McDonalds_POC/McDonalds_POC/bin/iPhoneSimulator/Debug/Xamarin.Auth.dll

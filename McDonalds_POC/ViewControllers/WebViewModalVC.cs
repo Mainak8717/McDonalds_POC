@@ -82,8 +82,8 @@ namespace McDonalds_POC
 
 		public void DownloadFiles()
 		{
-//			NSUrl urls = NSUrl.FromString("https://spo.mcd.com/sites/seeit_development3/brand/PublishingImages/burgers%20test.jpg");
-			NSUrl urls = NSUrl.FromString("https://spo.mcd.com/sites/seeit_development3/brand/PublishingImages/test1.mp4");
+			NSUrl urls = NSUrl.FromString("https://spo.mcd.com/sites/seeit_development3/brand/PublishingImages/burgers%20test.jpg");
+			//NSUrl urls = NSUrl.FromString("https://spo.mcd.com/sites/seeit_development3/brand/PublishingImages/test1.mp4");
 			// Configure your download session.
 			var config = NSUrlSessionConfiguration.DefaultSessionConfiguration;
 			NSUrlSession session = NSUrlSession.FromConfiguration(config, new DownloadFilesSessionDelegate(), new NSOperationQueue());
