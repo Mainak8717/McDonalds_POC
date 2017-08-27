@@ -42,13 +42,13 @@ namespace McDonalds_POC
 			string jpgFilename = System.IO.Path.Combine(documents, listOfFiles[0]);
 					
 
-			UIImageView monkeyIcon = new UIImageView(new CGRect(0, 0, 256, 256));
-			monkeyIcon.Image = UIImage.FromFile(jpgFilename);
-			monkeyIcon.UserInteractionEnabled = true;
-
+			UIImageView imageView = new UIImageView(new CGRect(0, 0, 150, 150));
+			imageView.Image = UIImage.FromFile(jpgFilename);
+			imageView.UserInteractionEnabled = true;
+			imageView.ContentMode = UIViewContentMode.ScaleAspectFit;
 			// Create a view controller to act as the popover
 			UIViewController popover = new UIViewController();
-			popover.View = monkeyIcon;
+			popover.View = imageView;
 			popover.ModalPresentationStyle = UIModalPresentationStyle.Popover;
 
 			// Grab Image
@@ -58,7 +58,7 @@ namespace McDonalds_POC
 			var closeButton = new ImageButton(new CGRect(popover.View.Frame.Size.Width, 20, image.Size.Width, image.Size.Height));
 			closeButton.UserInteractionEnabled = true;
 			closeButton.Image = image;
-			monkeyIcon.AddSubview(closeButton);
+			imageView.AddSubview(closeButton);
 
 			// Wireup the close button
 			closeButton.Touched += (button) =>
