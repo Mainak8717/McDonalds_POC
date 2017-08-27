@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocalFilesVC">
+            <connections>
+                <outlet property="localFiles_TblView" destination="PBK-fD-xDb" id="v6c-TK-m7T"/>
+                <outlet property="view" destination="2" id="RRd-Eg-VrN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="2">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="XhB-ig-cdQ">
+                    <rect key="frame" x="0.0" y="65" width="375" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="kpo-DK-ZUW"/>
+                    </constraints>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PBK-fD-xDb">
+                    <rect key="frame" x="0.0" y="109" width="375" height="381"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="381" id="sgl-Rc-rxl"/>
+                    </constraints>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="XhB-ig-cdQ" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="C0g-AD-k1K"/>
+                <constraint firstAttribute="trailing" secondItem="XhB-ig-cdQ" secondAttribute="trailing" id="NhO-rW-kun"/>
+                <constraint firstAttribute="trailing" secondItem="PBK-fD-xDb" secondAttribute="trailing" id="VVE-KY-soi"/>
+                <constraint firstItem="PBK-fD-xDb" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="r0g-Ik-tJ7"/>
+                <constraint firstItem="PBK-fD-xDb" firstAttribute="top" secondItem="2" secondAttribute="top" constant="109" id="v1Z-Cj-p0z"/>
+                <constraint firstItem="XhB-ig-cdQ" firstAttribute="top" secondItem="2" secondAttribute="top" constant="65" id="xUe-2T-Abx"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
+        </view>
+    </objects>
+</document>
