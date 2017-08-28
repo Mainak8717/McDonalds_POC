@@ -7,11 +7,18 @@ using Xamarin.Auth;
 
 namespace McDonalds_POC
 {
-	public partial class WebViewModalVC : UIViewController, IWKUIDelegate, IWKNavigationDelegate
+	public partial class WebViewModalVC : UIViewController, IWKUIDelegate, IWKNavigationDelegate, IWKScriptMessageHandler
 	{
 		WKWebView webView;
 		private NSUrl url;
 		private LoadingOverlay loadPop;
+
+		const string JavaScriptFunctionForVideo = "function getVideoURL(data){window.webkit.messageHandlers.callBack.postMessage(data);}";
+		const string JavaScriptFunctionForImage = "function getImageURL(data){window.webkit.messageHandlers.callBack.postMessage(data);}";
+		const string JavaScriptFunctionForPDF = "function getPDFURL(data){window.webkit.messageHandlers.callBack.postMessage(data);}";
+		const string JavaScriptFunctionForDownloadAll = "function getAllURL(data){window.webkit.messageHandlers.callBack.postMessage(data);}";
+		const string JavaScriptFunction = "function getURL(data){window.webkit.messageHandlers.callBack.postMessage(data);}";
+
 
 		public WebViewModalVC(NSUrl url) : base("WebViewModalVC", null)
 		{
@@ -21,11 +28,32 @@ namespace McDonalds_POC
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-			webView = new WKWebView(View.Frame, new WKWebViewConfiguration());
+
+			var userController = new WKUserContentController();
+
+			var scriptImage = new WKUserScript(new NSString(JavaScriptFunctionForImage), WKUserScriptInjectionTime.AtDocumentEnd, false);
+			var scriptVideo = new WKUserScript(new NSString(JavaScriptFunctionForVideo), WKUserScriptInjectionTime.AtDocumentEnd, false);
+			var scriptPDF = new WKUserScript(new NSString(JavaScriptFunctionForPDF), WKUserScriptInjectionTime.AtDocumentEnd, false);
+			var scriptAllFiles = new WKUserScript(new NSString(JavaScriptFunctionForDownloadAll), WKUserScriptInjectionTime.AtDocumentEnd, false);
+			var scriptGetURL = new WKUserScript(new NSString(JavaScriptFunction), WKUserScriptInjectionTime.AtDocumentEnd, false);
+
+			userController.AddUserScript(scriptGetURL);
+			userController.AddScriptMessageHandler(this, "callBack");
+
+			webView = new WKWebView(new CoreGraphics.CGRect(0, 0, 375, 667), new WKWebViewConfiguration()
+			{
+				UserContentController = userController
+			});
 			webView.UIDelegate = this;
 			webView.NavigationDelegate = this;
 			View.AddSubview(webView);
 			webView.LoadRequest(new NSUrlRequest(url));
+			StartActivityIndicatorWithText("Loading...");
+
+		}
+		public override void ViewWillAppear(bool animated)
+		{
+			base.ViewWillAppear(animated);
 		}
 
 		/// <summary>
@@ -35,7 +63,6 @@ namespace McDonalds_POC
 		public void DidReceiveAuthenticationChallenge(WKWebView webView, NSUrlAuthenticationChallenge challenge, Action<NSUrlSessionAuthChallengeDisposition, NSUrlCredential> completionHandler)
 		{
 			NSUrlCredential userCredential = NSUrlCredential.FromUserPasswordPersistance(UserName, Password, NSUrlCredentialPersistence.None);
-			//challenge.Sender.UseCredential(userCredential, challenge);
 			completionHandler(NSUrlSessionAuthChallengeDisposition.UseCredential, userCredential);
 		}
 
@@ -43,55 +70,17 @@ namespace McDonalds_POC
 		public void DidFinishNavigation(WKWebView webView, WKNavigation navigation)
 		{
 			StopActivityIndicator();
-			DownloadFiles();
-		}
-
-
-		[Export("webView:didStartProvisionalNavigation:")]
-		public void DidStartProvisionalNavigation(WKWebView webView, WKNavigation navigation)
-		{
-			StartActivityIndicatorWithText("Loading...");
-		}
-
-		/// <summary>
-		/// Java Script Methods
-		/// </summary>
-
-		[Foundation.Export("webView:runJavaScriptAlertPanelWithMessage:initiatedByFrame:completionHandler:")]
-		public void RunJavaScriptAlertPanel(WebKit.WKWebView webView, string message, WebKit.WKFrameInfo frame, System.Action completionHandler)
-		{
 
 		}
 
-		// Called when a Javascript confirm() alert is called in the WKWebView
-		[Export("webView:runJavaScriptConfirmPanelWithMessage:initiatedByFrame:completionHandler:")]
-		public void RunJavaScriptConfirmPanel(WKWebView webView, string message, WKFrameInfo frame, Action<bool> completionHandler)
+		public void DownloadFiles(NSUrl url)
 		{
-
-		}
-
-		// Called when a Javascript prompt() alert is called in the WKWebView
-		[Foundation.Export("webView:runJavaScriptTextInputPanelWithPrompt:defaultText:initiatedByFrame:completionHandler:")]
-		public void RunJavaScriptTextInputPanel(WebKit.WKWebView webView, string prompt, string defaultText, WebKit.WKFrameInfo frame, System.Action<string> completionHandler)
-		{
-
-		}
-
-		public void DownloadFiles()
-		{
-			//   https://spo.mcd.com/sites/seeit_development3/brand/Shared%20Documents/17155MCD-Wireframe-TemplateGrid_10.pdf,
-			//   https://spo.mcd.com/sites/seeit_development3/brand/PublishingImages/burgers%20test.jpg,
-			//   https://spo.mcd.com/sites/seeit_development3/brand/PublishingImages/test1.mp4
-
-			NSUrl urls = NSUrl.FromString("https://spo.mcd.com/sites/seeit_development3/brand/PublishingImages/burgers%20test.jpg");
-			//NSUrl urls = NSUrl.FromString("https://spo.mcd.com/sites/seeit_development3/brand/PublishingImages/test1.mp4");
-			//NSUrl urls = NSUrl.FromString("https://spo.mcd.com/sites/seeit_development3/brand/Shared%20Documents/17155MCD-Wireframe-TemplateGrid_10.pdf");
+			UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
 
 			var config = NSUrlSessionConfiguration.DefaultSessionConfiguration;
 			NSUrlSession session = NSUrlSession.FromConfiguration(config, new DownloadFilesSessionDelegate(), new NSOperationQueue());
-			var downloadTask = session.CreateDownloadTask(NSUrlRequest.FromUrl(urls));
+			var downloadTask = session.CreateDownloadTask(NSUrlRequest.FromUrl(url));
 
-			// Start the session.
 			downloadTask.Resume();
 		}
 
@@ -104,12 +93,24 @@ namespace McDonalds_POC
 		private void StartActivityIndicatorWithText(string message)
 		{
 			var bounds = UIScreen.MainScreen.Bounds;
-			loadPop = new LoadingOverlay(bounds, message);
+			loadPop = new LoadingOverlay(View.Frame, message);
 			View.Add(loadPop);
+			View.BringSubviewToFront(loadPop);
 		}
 		private void StopActivityIndicator()
 		{
 			loadPop.Hide();
+		}
+
+		public void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
+		{
+			var msg = message.Body.ToString();
+			string[] urlArray = msg.Split(',');
+			foreach (string urlfromArray in urlArray)
+			{
+				NSUrl downloadURL = NSUrl.FromString(urlfromArray);
+				DownloadFiles(downloadURL);
+			}
 		}
 
 		/// <summary>
@@ -119,16 +120,16 @@ namespace McDonalds_POC
 		{
 			get
 			{
-				var account = AccountStore.Create().FindAccountsForService(AppDelegate.AppName).FirstOrDefault();
-				return (account != null) ? account.Properties["Username"] : null;
+				var userName = NSUserDefaults.StandardUserDefaults.StringForKey("Username");
+				return (userName != null) ? userName : null;
 			}
 		}
 		public string Password
 		{
 			get
 			{
-				var account = AccountStore.Create().FindAccountsForService(AppDelegate.AppName).FirstOrDefault();
-				return (account != null) ? account.Properties["Password"] : null;
+				var password = NSUserDefaults.StandardUserDefaults.StringForKey("Password");
+				return (password != null) ? password : null;
 			}
 		}
 	}

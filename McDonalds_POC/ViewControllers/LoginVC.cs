@@ -59,17 +59,17 @@ namespace McDonalds_POC
 			{
 				if (!string.IsNullOrWhiteSpace(username_TxtField.Text) && !string.IsNullOrWhiteSpace(password_TxtField.Text))
 				{
-					Account account = new Account();
-					account.Properties.Add("Username", username_TxtField.Text);
-					account.Properties.Add("Password", password_TxtField.Text);
-					AccountStore.Create().Save(account, AppDelegate.AppName);
-					this.NavigationController.PushViewController(new HomeVC(), true);
-					//HomeVC homeVC = new HomeVC();
-					//UINavigationController navC = new UINavigationController(homeVC);
-					//UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.Yellow });
+					//Account account = new Account();
+					//account.Properties.Add("Username", username_TxtField.Text);
+					//account.Properties.Add("Password", password_TxtField.Text);
+					//AccountStore.Create().Save(account, AppDelegate.AppName);
 
-					//UIApplication.SharedApplication.Windows[0].RootViewController = navC;
-					//this.PresentViewController(homeVC, true, () => { });
+					NSUserDefaults.StandardUserDefaults.SetString(username_TxtField.Text.ToString(), "Username");
+					NSUserDefaults.StandardUserDefaults.SetString(password_TxtField.Text.ToString(), "Password");
+					UINavigationController navC = new UINavigationController(new HomeVC());
+
+					UIApplication.SharedApplication.KeyWindow.RootViewController = navC;
+					UIApplication.SharedApplication.KeyWindow.MakeKeyAndVisible();
 
 				}
 			}

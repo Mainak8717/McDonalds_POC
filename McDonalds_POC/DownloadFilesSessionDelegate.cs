@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using Foundation;
 using Xamarin.Auth;
+using UIKit;
+
 
 namespace McDonalds_POC
 {
@@ -34,6 +36,7 @@ namespace McDonalds_POC
 					Console.WriteLine("Error during the copy: {0}", error.LocalizedDescription);
 				}
 			}
+			UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
 		}
 
 		public override void DidReceiveChallenge(NSUrlSession session, NSUrlSessionTask task, NSUrlAuthenticationChallenge challenge, Action<NSUrlSessionAuthChallengeDisposition, NSUrlCredential> completionHandler)
@@ -54,16 +57,16 @@ namespace McDonalds_POC
 		{
 			get
 			{
-				var account = AccountStore.Create().FindAccountsForService(AppDelegate.AppName).FirstOrDefault();
-				return (account != null) ? account.Properties["Username"] : null;
+				var userName = NSUserDefaults.StandardUserDefaults.StringForKey("Username");
+				return (userName != null) ? userName : null;
 			}
 		}
 		public string Password
 		{
 			get
 			{
-				var account = AccountStore.Create().FindAccountsForService(AppDelegate.AppName).FirstOrDefault();
-				return (account != null) ? account.Properties["Password"] : null;
+				var password = NSUserDefaults.StandardUserDefaults.StringForKey("Password");
+				return (password != null) ? password : null;
 			}
 		}
 	}

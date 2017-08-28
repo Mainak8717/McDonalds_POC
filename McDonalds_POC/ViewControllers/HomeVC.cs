@@ -17,7 +17,7 @@ namespace McDonalds_POC
             this.NavigationController.NavigationBar.BarTintColor = UIColor.Red;
 			this.Title = "Home";
 
-			var dict = new NSDictionary("See it", "https://spo.mcd.com/sites/seeit_development3/brand/cognizant-test-brand-05242017","Local Files","");
+			var dict = new NSDictionary("See it", "https://spo.mcd.com/sites/seeit_development3/brand/cognizant-test-brand-05242017?FromMobile='Y'","Local Files","");
 			sharepointURLS_TblView.TableFooterView = new UIView();
 			sharepointURLS_TblView.Source = new TableSource(dict,this);
 		}

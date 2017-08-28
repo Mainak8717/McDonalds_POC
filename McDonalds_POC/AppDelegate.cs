@@ -22,8 +22,10 @@ namespace McDonalds_POC
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
 			UINavigationController navC;
-			var account = AccountStore.Create().FindAccountsForService(AppDelegate.AppName).FirstOrDefault();
-			if (account == null)
+			//var account = AccountStore.Create().FindAccountsForService(AppDelegate.AppName).FirstOrDefault();
+			var userName = NSUserDefaults.StandardUserDefaults.StringForKey("Username");
+
+			if (string.IsNullOrEmpty(userName))
 				navC = new UINavigationController(new LoginVC());
 			else
 				navC = new UINavigationController(new HomeVC());

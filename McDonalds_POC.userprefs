@@ -1,14 +1,25 @@
-﻿<Properties StartupConfiguration="{9F9816BD-37F2-43B9-82E4-C0A3AAE230D8}|Default">
-  <MonoDevelop.Ide.ItemProperties.McDonalds__POC PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.E48B4C87-6E51-449A-974B-D2D685100032" HideGettingStarted="True" />
+﻿<Properties StartupConfiguration="{9F9816BD-37F2-43B9-82E4-C0A3AAE230D8}|Default" GitUserInfo="UsingGIT">
+  <MonoDevelop.Ide.ItemProperties.McDonalds__POC PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.D3A3B8A4-964B-4056-8FD0-3FF3544E6604" HideGettingStarted="True" />
   <MonoDevelop.Ide.Workbench ActiveDocument="McDonalds_POC Status">
     <Files>
-      <File FileName="McDonalds_POC/ViewControllers/WebViewModalVC.cs" Line="84" Column="9" />
+      <File FileName="McDonalds_POC/ViewControllers/WebViewModalVC.cs" Line="111" Column="1" />
+      <File FileName="McDonalds_POC/DownloadFilesSessionDelegate.cs" Line="39" Column="67" />
+      <File FileName="ViewControllers Status" />
+      <File FileName="McDonalds_POC/LoadingOverlay.cs" Line="13" Column="10" />
+      <File FileName="McDonalds_POC/ViewControllers/LoginVC.cs" Line="71" Column="1" />
+      <File FileName="McDonalds_POC/AppDelegate.cs" Line="26" Column="1" />
+      <File FileName="McDonalds_POC/ViewControllers/HomeVC.cs" Line="18" Column="24" />
       <File FileName="McDonalds_POC Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|iPhoneSimulator" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/KolkataMobility/Desktop/McDonalds_POC/McDonalds_POC/Main.cs" relfile="McDonalds_POC/Main.cs" line="27" column="1" />
+      <Breakpoint file="/Users/KolkataMobility/Desktop/McDonalds_POC/McDonalds_POC/ViewControllers/WebViewModalVC.cs" relfile="McDonalds_POC/ViewControllers/WebViewModalVC.cs" line="111" column="1" />
+      <Breakpoint file="/Users/KolkataMobility/Desktop/McDonalds_POC/McDonalds_POC/AppDelegate.cs" relfile="McDonalds_POC/AppDelegate.cs" line="26" column="1" />
+      <Breakpoint file="/Users/KolkataMobility/Desktop/McDonalds_POC/McDonalds_POC/ViewControllers/LoginVC.cs" relfile="McDonalds_POC/ViewControllers/LoginVC.cs" line="71" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MultiItemStartupConfigurations />
