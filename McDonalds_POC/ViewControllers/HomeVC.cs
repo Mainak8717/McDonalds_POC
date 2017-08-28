@@ -14,6 +14,15 @@ namespace McDonalds_POC
 		{
 			base.ViewDidLoad();
 
+            this.NavigationItem.SetRightBarButtonItem(
+
+	new UIBarButtonItem(UIImage.FromFile("exitImg.png")
+    , UIBarButtonItemStyle.Plain
+    , (sender,args) => {
+       // button was clicked
+    })
+, true);
+
             this.NavigationController.NavigationBar.BarTintColor = UIColor.Red;
 			this.Title = "Home";
 
