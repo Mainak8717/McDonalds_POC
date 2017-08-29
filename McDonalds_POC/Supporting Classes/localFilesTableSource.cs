@@ -72,10 +72,10 @@ namespace McDonalds_POC
 			popover.ModalPresentationStyle = UIModalPresentationStyle.Popover;
 
 			// Grab Image
-			var image = UIImage.FromFile("closeImg.png");
+			var image = UIImage.FromFile("close.png");
 
 			// Add a close button
-			var closeButton = new ImageButton(new CGRect(UIScreen.MainScreen.Bounds.Size.Width - 80, 20, image.Size.Width, image.Size.Height));
+			var closeButton = new ImageButton(new CGRect(340, 30, image.Size.Width, image.Size.Height));
 			closeButton.UserInteractionEnabled = true;
 			closeButton.Image = image;
 			pdfView.AddSubview(closeButton);
@@ -104,7 +104,7 @@ namespace McDonalds_POC
 			var image = UIImage.FromFile("close.png");
 
 			// Add a close button
-			var closeButton = new ImageButton(new CGRect(350, 20, image.Size.Width, image.Size.Height));
+			var closeButton = new ImageButton(new CGRect(340, 30, image.Size.Width, image.Size.Height));
 			closeButton.UserInteractionEnabled = true;
 			closeButton.Image = image;
 			imageView.AddSubview(closeButton);

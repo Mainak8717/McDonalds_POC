@@ -116,6 +116,7 @@
     <Folder Include="Resources\" />
     <Folder Include="ViewControllers\" />
     <Folder Include="Xibs\" />
+    <Folder Include="Supporting Classes\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -133,12 +134,6 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="ViewController.cs" />
-    <Compile Include="ViewController.designer.cs">
-      <DependentUpon>ViewController.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LoadingOverlay.cs" />
-    <Compile Include="TableSource.cs" />
     <Compile Include="ViewControllers\HomeVC.cs" />
     <Compile Include="ViewControllers\HomeVC.designer.cs">
       <DependentUpon>HomeVC.cs</DependentUpon>
@@ -155,8 +150,10 @@
     <Compile Include="ViewControllers\WebViewModalVC.designer.cs">
       <DependentUpon>WebViewModalVC.cs</DependentUpon>
     </Compile>
-    <Compile Include="localFilesTableSource.cs" />
-    <Compile Include="DownloadFilesSessionDelegate.cs" />
+    <Compile Include="Supporting Classes\DownloadFilesSessionDelegate.cs" />
+    <Compile Include="Supporting Classes\LoadingOverlay.cs" />
+    <Compile Include="Supporting Classes\TableSource.cs" />
+    <Compile Include="Supporting Classes\localFilesTableSource.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\loginImg.jpg" />
