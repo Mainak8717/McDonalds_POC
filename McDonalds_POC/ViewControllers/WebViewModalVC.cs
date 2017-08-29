@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Foundation;
 using UIKit;
 using WebKit;
@@ -48,14 +49,9 @@ namespace McDonalds_POC
 			webView.NavigationDelegate = this;
 			View.AddSubview(webView);
 			webView.LoadRequest(new NSUrlRequest(url));
-			StartActivityIndicatorWithText("Loading...");
+			StartActivityIndicatorWithText("Loading...",new CoreGraphics.CGRect(0, 0, 375, 667));
 
 		}
-		public override void ViewWillAppear(bool animated)
-		{
-			base.ViewWillAppear(animated);
-		}
-
 		/// <summary>
 		/// WKWebview Delegate Methods
 		/// </summary>
@@ -90,10 +86,9 @@ namespace McDonalds_POC
 		/// <summary>
 		/// Activity Indicator Methods
 		/// </summary>
-		private void StartActivityIndicatorWithText(string message)
+		private void StartActivityIndicatorWithText(string message, CoreGraphics.CGRect frame)
 		{
-			var bounds = UIScreen.MainScreen.Bounds;
-			loadPop = new LoadingOverlay(View.Frame, message);
+			loadPop = new LoadingOverlay(frame, message);
 			View.Add(loadPop);
 			View.BringSubviewToFront(loadPop);
 		}
@@ -102,12 +97,27 @@ namespace McDonalds_POC
 			loadPop.Hide();
 		}
 
-		public void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
+		public async void DidReceiveScriptMessage(WKUserContentController userContentController, WKScriptMessage message)
 		{
+			StartActivityIndicatorWithText("Download in progress..", new CoreGraphics.CGRect(82.5, 225, 200, 200));
+			await Task.Delay(2000);
+			StopActivityIndicator();
 			var msg = message.Body.ToString();
 			string[] urlArray = msg.Split(',');
+			if (AppDelegate.filesDownloading != null){
+				AppDelegate.filesDownloading.RemoveAllObjects();
+				AppDelegate.filesDownloaded.RemoveAllObjects();
+			}
+			AppDelegate.filesDownloading = new NSMutableArray();
+			AppDelegate.filesDownloaded = new NSMutableArray();
+
 			foreach (string urlfromArray in urlArray)
 			{
+				string urlString = System.Web.HttpUtility.UrlDecode(urlfromArray.ToString());
+				string fileType = urlString.Substring(urlString.Length - 3);
+				int idx = urlString.LastIndexOf('/');
+				var fileName = urlString.Substring(idx + 1);
+				AppDelegate.filesDownloading.Add(NSObject.FromObject(fileName));
 				NSUrl downloadURL = NSUrl.FromString(urlfromArray);
 				DownloadFiles(downloadURL);
 			}

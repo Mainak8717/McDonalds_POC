@@ -38,7 +38,7 @@ namespace McDonalds_POC
 			// create and configure the "Loading Data" label
 			loadingLabel = new UILabel(new CGRect(
 				centerX - (labelWidth / 2),
-				centerY + 20,
+				centerY + 10,
 				labelWidth,
 				labelHeight
 				));

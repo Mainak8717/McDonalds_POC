@@ -22,7 +22,6 @@ namespace McDonalds_POC
 		public LoginVC() : base("LoginVC", null)
 		{
 		}
-
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
@@ -54,7 +53,7 @@ namespace McDonalds_POC
 		/// </summary>
 		partial void Submit_Btn_Action(NSObject sender)
 		{
-			StartActivityIndicatorWithText("Hold on...");
+			StartActivityIndicatorWithText("Please Wait...");
 			try
 			{
 				if (!string.IsNullOrWhiteSpace(username_TxtField.Text) && !string.IsNullOrWhiteSpace(password_TxtField.Text))
@@ -76,9 +75,9 @@ namespace McDonalds_POC
 			catch (Exception ex)
 			{
 				var okAlertController = UIAlertController.Create("Error", ex.Message, UIAlertControllerStyle.Alert);
-				okAlertController.AddAction (UIAlertAction.Create ("OK", UIAlertActionStyle.Default, null));
+				okAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
 				PresentViewController(okAlertController, true, null);
-                StopActivityIndicator();
+				StopActivityIndicator();
 			}
 			finally
 			{
@@ -91,8 +90,8 @@ namespace McDonalds_POC
 		private void StartActivityIndicatorWithText(string message)
 		{
 			var bounds = UIScreen.MainScreen.Bounds;
-			loadPop = new LoadingOverlay(bounds,message);
-			View.Add (loadPop);
+			loadPop = new LoadingOverlay(bounds, message);
+			View.Add(loadPop);
 		}
 		private void StopActivityIndicator()
 		{

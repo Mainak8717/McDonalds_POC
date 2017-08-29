@@ -4,6 +4,7 @@ using Foundation;
 using CoreGraphics;
 using System.Linq;
 using MediaPlayer;
+using System.IO;
 
 namespace McDonalds_POC
 {
@@ -57,7 +58,6 @@ namespace McDonalds_POC
 				case "mp4":
 					playVideo(fileSelected);
 					break;
-
 			}
 			tableView.DeselectRow(indexPath, true);
 		}

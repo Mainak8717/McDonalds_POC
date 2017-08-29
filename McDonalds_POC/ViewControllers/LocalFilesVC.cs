@@ -14,13 +14,13 @@ namespace McDonalds_POC
 		public override void ViewDidLoad()
 		{
 			base.ViewDidLoad();
-            this.NavigationController.NavigationBar.BarTintColor = UIColor.Red;
+			this.NavigationController.NavigationBar.BarTintColor = UIColor.Red;
 			this.Title = "Local Files";
 
 			var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 			NSFileManager fileManager = NSFileManager.DefaultManager;
 			NSError error;
-			string[] listOfFiles = fileManager.GetDirectoryContent(documents,out error);
+			string[] listOfFiles = fileManager.GetDirectoryContent(documents, out error);
 
 			localFiles_TblView.TableFooterView = new UIView();
 			localFiles_TblView.Source = new localFilesTableSource(listOfFiles, this);

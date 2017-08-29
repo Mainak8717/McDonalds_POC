@@ -5,7 +5,6 @@ using Foundation;
 using Xamarin.Auth;
 using UIKit;
 
-
 namespace McDonalds_POC
 {
 	public class DownloadFilesSessionDelegate : NSUrlSessionDownloadDelegate
@@ -16,7 +15,7 @@ namespace McDonalds_POC
 			string fileType = urlString.Substring(urlString.Length - 3);
 			int idx = urlString.LastIndexOf('/');
 			string fileName = urlString.Substring(idx + 1);
-
+			AppDelegate.filesDownloaded.Add(NSObject.FromObject(fileName));
 			var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 			var destinationPath = Path.Combine(documents, fileName);
 
@@ -36,9 +35,33 @@ namespace McDonalds_POC
 					Console.WriteLine("Error during the copy: {0}", error.LocalizedDescription);
 				}
 			}
-			UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
-		}
+			int count = 0;
+			for (nuint i = 0; i < AppDelegate.filesDownloading.Count; i++)
+			{
+				for (nuint j = 0; j < AppDelegate.filesDownloaded.Count; j++)
+				{
+					if (AppDelegate.filesDownloading.GetItem<NSObject>(i).Equals(AppDelegate.filesDownloading.GetItem<NSObject>(j)))
+					{
+						count = count + 1;
+					}
+				}
 
+			}
+			if (count == (int)AppDelegate.filesDownloading.Count)
+			{
+				InvokeOnMainThread(delegate
+				{
+					var notification = new UILocalNotification();
+					notification.FireDate = NSDate.FromTimeIntervalSinceNow(1);
+					notification.AlertAction = "McDonalds:File Download Complete";
+					notification.AlertBody = "McDonalds:File Download Complete";
+					notification.ApplicationIconBadgeNumber = 1;
+					notification.SoundName = UILocalNotification.DefaultSoundName;
+					UIApplication.SharedApplication.ScheduleLocalNotification(notification);
+					UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+				});
+  		  }
+		}
 		public override void DidReceiveChallenge(NSUrlSession session, NSUrlSessionTask task, NSUrlAuthenticationChallenge challenge, Action<NSUrlSessionAuthChallengeDisposition, NSUrlCredential> completionHandler)
 		{
 			//base.DidReceiveChallenge(session, task, challenge, completionHandler);

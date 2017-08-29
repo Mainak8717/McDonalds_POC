@@ -19,6 +19,8 @@ namespace McDonalds_POC
 		}
 		public static string AppName { get { return "McDonalds_POC"; } }
 
+		public static NSMutableArray filesDownloading;
+		public static NSMutableArray filesDownloaded;
 		public override bool FinishedLaunching(UIApplication application, NSDictionary launchOptions)
 		{
 			UINavigationController navC;
@@ -34,9 +36,42 @@ namespace McDonalds_POC
 			Window.RootViewController = navC;
 			Window.MakeKeyAndVisible();
 
+			var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
+											  UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
+										  );
+			application.RegisterUserNotificationSettings(notificationSettings);
+			//}
+			if (launchOptions != null)
+			{
+				// check for a local notification
+				if (launchOptions.ContainsKey(UIApplication.LaunchOptionsLocalNotificationKey))
+				{
+					var localNotification = launchOptions[UIApplication.LaunchOptionsLocalNotificationKey] as UILocalNotification;
+					if (localNotification != null)
+					{
+						UIAlertController okayAlertController = UIAlertController.Create(localNotification.AlertAction, localNotification.AlertBody, UIAlertControllerStyle.Alert);
+						okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
+
+
+						this.Window.RootViewController.PresentedViewController.PresentViewController(okayAlertController, true, null);
+
+						// reset our badge
+						UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
+					}
+				}
+			}
+
+
 			return true;
 		}
-
+		public override void ReceivedLocalNotification(UIApplication application, UILocalNotification notification)
+		{
+			UIAlertView alert = new UIAlertView() { Title = notification.AlertAction, Message = notification.AlertBody };
+			alert.AddButton("OK");
+			alert.Show();
+			// CLEAR BADGES
+			UIApplication.SharedApplication.ApplicationIconBadgeNumber = (System.nint)filesDownloaded.Count;
+		}
 		public override void OnResignActivation(UIApplication application)
 		{
 			// Invoked when the application is about to move from active to inactive state.

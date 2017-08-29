@@ -2,11 +2,9 @@
   <MonoDevelop.Ide.ItemProperties.McDonalds__POC PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.D3A3B8A4-964B-4056-8FD0-3FF3544E6604" HideGettingStarted="True" />
   <MonoDevelop.Ide.Workbench ActiveDocument="McDonalds_POC Status">
     <Files>
-      <File FileName="McDonalds_POC/AppDelegate.cs" Line="26" Column="1" />
-      <File FileName="McDonalds_POC/ViewControllers/LoginVC.cs" Line="71" Column="1" />
-      <File FileName="McDonalds_POC/ViewControllers/WebViewModalVC.cs" Line="111" Column="1" />
-      <File FileName="McDonalds_POC/localFilesTableSource.cs" Line="107" Column="52" />
-      <File FileName="McDonalds_POC/ViewControllers/HomeVC.cs" Line="20" Column="33" />
+      <File FileName="McDonalds_POC/LoadingOverlay.cs" Line="41" Column="16" />
+      <File FileName="McDonalds_POC/DownloadFilesSessionDelegate.cs" Line="7" Column="1" />
+      <File FileName="McDonalds_POC/ViewControllers/WebViewModalVC.cs" Line="100" Column="15" />
       <File FileName="McDonalds_POC Status" />
     </Files>
   </MonoDevelop.Ide.Workbench>
