@@ -52,11 +52,7 @@ namespace McDonalds_POC
 						UIAlertController okayAlertController = UIAlertController.Create(localNotification.AlertAction, localNotification.AlertBody, UIAlertControllerStyle.Alert);
 						okayAlertController.AddAction(UIAlertAction.Create("OK", UIAlertActionStyle.Default, null));
 
-
 						this.Window.RootViewController.PresentedViewController.PresentViewController(okayAlertController, true, null);
-
-						// reset our badge
-						UIApplication.SharedApplication.ApplicationIconBadgeNumber = 0;
 					}
 				}
 			}
@@ -69,8 +65,6 @@ namespace McDonalds_POC
 			UIAlertView alert = new UIAlertView() { Title = notification.AlertAction, Message = notification.AlertBody };
 			alert.AddButton("OK");
 			alert.Show();
-			// CLEAR BADGES
-			UIApplication.SharedApplication.ApplicationIconBadgeNumber = (System.nint)filesDownloaded.Count;
 		}
 		public override void OnResignActivation(UIApplication application)
 		{

@@ -36,7 +36,6 @@ namespace McDonalds_POC
 			NSNotificationCenter.DefaultCenter.AddObserver
 								(UIKeyboard.WillHideNotification, KeyBoardWillHide);
 
-			username_TxtField.Text = "https://spo.mcd.com/sites/seeit_development3/brand/cognizant-test-brand-05242017";
 			username_TxtField.ShouldReturn = delegate
 			{
 				username_TxtField.ResignFirstResponder();

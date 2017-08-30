@@ -111,6 +111,8 @@
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\appIcon.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\AppIcon2.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
