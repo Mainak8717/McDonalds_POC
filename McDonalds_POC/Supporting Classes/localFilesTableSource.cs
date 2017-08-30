@@ -70,7 +70,7 @@ namespace McDonalds_POC
 					loadPDF(fileSelected);
 					break;
 				case "mp4":
-					playVideo(fileSelected);
+					//playVideo(fileSelected);
 					break;
 			}
 			tableView.DeselectRow(indexPath, true);
