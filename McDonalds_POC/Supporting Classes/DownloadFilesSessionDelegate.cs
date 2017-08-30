@@ -47,6 +47,9 @@ namespace McDonalds_POC
 				}
 
 			}
+			NSDictionary countDict = new NSDictionary("count", count);
+			NSNotificationCenter.DefaultCenter.PostNotificationName("DownloadCount", this, countDict);
+
 			if (count == (int)AppDelegate.filesDownloading.Count)
 			{
 				InvokeOnMainThread(delegate

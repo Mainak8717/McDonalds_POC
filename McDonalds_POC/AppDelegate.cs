@@ -38,8 +38,9 @@ namespace McDonalds_POC
 
 			var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
 											  UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
-										  );
+								  );
 			application.RegisterUserNotificationSettings(notificationSettings);
+			application.ApplicationIconBadgeNumber = 0;
 			//}
 			if (launchOptions != null)
 			{

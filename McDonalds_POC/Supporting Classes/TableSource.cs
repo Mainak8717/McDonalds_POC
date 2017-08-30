@@ -11,7 +11,7 @@ namespace McDonalds_POC
 		NSObject[] keyArray;
 		string CellIdentifier = "TableCell";
 		HomeVC owner;
-
+		string[] countArray;
 		public TableSource(NSDictionary items, HomeVC owner)
 		{
 			TableItems = items;
@@ -27,8 +27,12 @@ namespace McDonalds_POC
 			if (cell == null){ 
 				cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
 			}
-			cell.DetailTextLabel.Text = value.ToString();
 			cell.TextLabel.Text = key.ToString();
+			if(cell.TextLabel.Text.Equals("Local Files"))
+				cell.DetailTextLabel.Text = "Total Files:"+value.ToString();
+			else
+				cell.DetailTextLabel.Text = value.ToString();
+
 
 			return cell;
 		}
@@ -42,7 +46,7 @@ namespace McDonalds_POC
 			//base.RowSelected(tableView, indexPath);
 			var key = keyArray[indexPath.Row];
 			var value = TableItems.ValueForKey((Foundation.NSString)key);
-			if (indexPath.Row == 0)
+			if (keyArray[indexPath.Row].ToString().Equals("Local Files"))
 				owner.NavigationController.PushViewController(new LocalFilesVC(), true);
 			else
 				owner.NavigationController.PushViewController(new WebViewModalVC(new NSUrl(value.ToString())), true);

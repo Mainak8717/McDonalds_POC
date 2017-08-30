@@ -20,8 +20,8 @@ namespace McDonalds_POC
 			var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 			NSFileManager fileManager = NSFileManager.DefaultManager;
 			NSError error;
+			//NSDictionary* fileAttributes = [fileManager fileAttributesAtPath: filePath traverseLink:YES];
 			string[] listOfFiles = fileManager.GetDirectoryContent(documents, out error);
-
 			localFiles_TblView.TableFooterView = new UIView();
 			localFiles_TblView.Source = new localFilesTableSource(listOfFiles, this);
 		}

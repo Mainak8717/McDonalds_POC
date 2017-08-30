@@ -27,7 +27,21 @@ namespace McDonalds_POC
 				cell = new UITableViewCell(UITableViewCellStyle.Subtitle, CellIdentifier);
 			}
 			cell.TextLabel.Text = tableItems[indexPath.Row];
-
+			var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+		
+			FileInfo fi = new FileInfo(Path.Combine(documents, tableItems[indexPath.Row]));
+			double size = Math.Floor(Math.Log10(fi.Length) + 1);
+			decimal roundOff;
+			if (size == 6)
+			{
+				roundOff = Math.Round(Convert.ToDecimal(fi.Length / 1000.00), 2);
+				cell.DetailTextLabel.Text = "File Size:" + roundOff + "KB";
+			}
+			else
+			{
+				roundOff = Math.Round(Convert.ToDecimal(fi.Length / 1000000.00), 2);
+				cell.DetailTextLabel.Text = "File Size:" + roundOff +"MB";
+			}
 			return cell;
 		}
 
